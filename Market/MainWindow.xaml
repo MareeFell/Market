@@ -1,0 +1,68 @@
+﻿<Window x:Class="Market.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Market"
+        Style="{StaticResource MaterialDesignWindow}"
+        mc:Ignorable="d"
+        Icon="Images/icon.ico"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:views="clr-namespace:Market.Views"
+        Background="{DynamicResource MaterialDesign.Brush.Background}"
+        Title="MainWindow" Height="700" Width="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="250"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <materialDesign:Card Grid.Column="0" BorderThickness="0,1,1,1" UniformCornerRadius="10" Margin="1">
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="10,10,10,10" VerticalAlignment="Stretch">
+                    <TextBlock FontSize="20" FontWeight="Bold">Марина Сероева</TextBlock>
+                    <TextBlock FontSize="15" FontWeight="Medium" Margin="0,10,0,10">Мыло</TextBlock>
+
+                    <StackPanel Orientation="Vertical"
+                                Visibility="{Binding UserService.User, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWay, Converter={StaticResource NullableToVisibilityConverter}}">
+                        <StackPanel Orientation="Vertical"
+                                    Visibility="{Binding UserService.IsAdmin, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <views:PickerItem Image="./Images/product.png" Text="Заказ продуктов"
+                                              MouseDown="OnOrderProductListClick" />
+                            <views:PickerItem Image="./Images/product.png" Text="Товары на складе"
+                                              MouseDown="OnProductsListClick" />
+                            <views:PickerItem Image="./Images/product.png" Text="Отчеты"
+                                              MouseDown="OnReportListClick" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    Visibility="{Binding UserService.IsWorker, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <views:PickerItem Image="./Images/product.png" Text="Товары на складе" MouseDown="OnOrderProductListClick" />
+                            <views:PickerItem Image="./Images/product.png" Text="Отчеты" MouseDown="OnProductsListClick" />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical"
+                                    Visibility="{Binding UserService.IsStoreWorker, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <views:PickerItem Image="./Images/product.png" Text="Заказы" MouseDown="OnOrderProductListClick" />
+                            <views:PickerItem Image="./Images/product.png" Text="Отчеты" MouseDown="OnProductsListClick" />
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <views:PickerItem
+                    Visibility="{Binding UserService.User, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWay, Converter={StaticResource NullableToVisibilityConverter}}"
+                    Grid.Row="1" Image="./Images/close.png" VerticalAlignment="Bottom" Text="Выход"
+                    Margin="10,0,10,10"
+                    MouseDown="Logout" />
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card Grid.Column="1" Margin="10">
+            <Frame x:Name="Frame" Width="Auto" NavigationUIVisibility="Hidden"></Frame>
+        </materialDesign:Card>
+    </Grid>
+</Window>

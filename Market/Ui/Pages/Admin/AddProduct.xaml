@@ -1,0 +1,35 @@
+﻿<Window x:Class="Market.Ui.Pages.Admin.AddProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Market.Ui.Pages.Admin"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Icon="/Images/icon.ico"
+        Title="Добавить номенклатуру" Height="800" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center">Создание</TextBlock>
+        
+        <TextBox materialDesign:HintAssist.Hint="Введите имя" Grid.Row="1" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=NomenclatureName, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"></TextBox>
+        <TextBox materialDesign:HintAssist.Hint="Введите описание" Grid.Row="2" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=Description,RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"></TextBox>
+        <TextBox PreviewTextInput="NumberPViewTextInput" materialDesign:HintAssist.Hint="Введите цену продажи" Grid.Row="3" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=SellPrice, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"></TextBox>
+        <TextBox PreviewTextInput="NumberPViewTextInput" materialDesign:HintAssist.Hint="Введите цену покупки" Grid.Row="4" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=BuyPrice, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"></TextBox>
+        <TextBox PreviewTextInput="NumberPViewTextInput" materialDesign:HintAssist.Hint="Введите начальное количество" Grid.Row="5" VerticalAlignment="Center" Margin="20,0" Style="{StaticResource MaterialDesignOutlinedTextBox}" Text="{Binding Path=Count, RelativeSource={RelativeSource AncestorType=Window}, Mode=TwoWay}"></TextBox>
+        
+        <ComboBox Grid.Row="6" VerticalAlignment="Center" Margin="20,0" ItemsSource="{Binding Path=Categories, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Window}}" DisplayMemberPath="Name" SelectedValue="{Binding Path=CurrentCategory, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Window}}"></ComboBox>
+        
+        <Button Grid.Row="7" Margin="20, 0" Click="AddProductClick">Создать</Button>
+    </Grid>
+</Window>

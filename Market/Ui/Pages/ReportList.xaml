@@ -1,0 +1,26 @@
+﻿<Page x:Class="Market.Ui.Pages.ReportList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Market.Ui.Pages"
+      mc:Ignorable="d"
+      Title="Отчеты">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid
+            ItemsSource="{Binding Path=Orders, RelativeSource={RelativeSource AncestorType=Page}, Mode=TwoWay}"
+            AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="Auto" Binding="{Binding Path=Id}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Статус" Width="Auto" Binding="{Binding Path=OrderStatus}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Товары" Width="1*" Binding="{Binding Path=StringedOrderItems}" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="1" Margin="30,10" Click="CreateOrderClick">Создать отчет</Button>
+    </Grid>
+</Page>

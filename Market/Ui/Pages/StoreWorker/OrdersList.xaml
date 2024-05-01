@@ -1,0 +1,27 @@
+﻿<Page x:Class="Market.Ui.Pages.StoreWorker.OrdersList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Market.Ui.Pages.StoreWorker"
+      mc:Ignorable="d"
+      Title="Принятие заказов">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid
+            ItemsSource="{Binding Path=Orders, RelativeSource={RelativeSource AncestorType=Page}, Mode=TwoWay}"
+            AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="Auto" Binding="{Binding Path=Order.Id}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Статус" Width="Auto" Binding="{Binding Path=Order.OrderStatus}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Выполнено?" Width="Auto" Binding="{Binding Path=isDelivered}"></DataGridCheckBoxColumn>
+                <DataGridTextColumn Header="Товары" Width="1*" Binding="{Binding Path=Order.StringedOrderItems}" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="1" Margin="30,10" Click="UpdateDeliveryClick">Отметить как выполненые</Button>
+    </Grid>
+</Page>
